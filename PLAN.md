@@ -212,6 +212,28 @@ openclaw-misskey/
 - `Stream` クラスで WebSocket 自動再接続対応
 - ランタイム依存: `eventemitter3`, `reconnecting-websocket`, `autobind-decorator`
 
+## アーキテクチャ判断
+
+### MCP Server は不要
+
+Misskey へのアクセスは全て Channel Plugin 経由で行う。
+MCP Server（`misskey-mcp` 等）は作らない。理由：
+
+- Channel Plugin は既に Misskey API トークンと misskey-js クライアントを保持している
+- モデレーション等の管理系 API も Plugin の actions として追加すれば十分
+- Claude Code 等からのアドホックなアクセスは `curl` で代替可能
+- Misskey はストリーム型プラットフォームであり、常駐する Channel Plugin が最適なアクセス手段
+
+### モデレーション等の拡張
+
+将来的に自動モデレーションを行う場合の構成：
+
+```
+1. Channel Plugin（本リポ）— 通報・メンション受信 + 管理 API 呼び出し
+2. Skills（プロンプトファイル）— モデレーションワークフロー定義
+   → リポ不要。OpenClaw の設定ディレクトリに .md を置くだけ
+```
+
 ## 注意事項
 
 - 新チャット機能（メッセージ）はローカルユーザー間のみ。リモートユーザーにはダイレクトノートで対応
