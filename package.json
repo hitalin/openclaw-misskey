@@ -1,0 +1,47 @@
+{
+  "name": "@openclaw/misskey",
+  "version": "0.1.0",
+  "description": "OpenClaw Misskey channel plugin — receive and respond to messages, mentions, and notes via Fediverse",
+  "type": "module",
+  "main": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "misskey-js": "^2025.11.0",
+    "zod": "^4.3"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.2.0"
+  },
+  "devDependencies": {
+    "openclaw": "^2026.2.0",
+    "typescript": "^5.7",
+    "vitest": "^3.0"
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "channel": {
+      "id": "misskey",
+      "label": "Misskey",
+      "selectionLabel": "Misskey (plugin)",
+      "docsPath": "/channels/misskey",
+      "docsLabel": "misskey",
+      "blurb": "Fediverse microblogging; configure instance URL + API token.",
+      "order": 80,
+      "quickstartAllowFrom": true
+    },
+    "install": {
+      "npmSpec": "@openclaw/misskey"
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamisskey-dev/openclaw-misskey"
+  }
+}

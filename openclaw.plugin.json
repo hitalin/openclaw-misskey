@@ -1,0 +1,9 @@
+{
+  "id": "misskey",
+  "channels": ["misskey"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
